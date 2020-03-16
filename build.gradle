@@ -1,0 +1,45 @@
+repositories {
+
+    maven { url 'http://artifactory.bancolombia.corp:80/global-bancolombia/'}
+}
+
+buildscript {
+    repositories {
+       
+       maven { url 'http://artifactory.bancolombia.corp:80/global-bancolombia/'}
+    }
+    dependencies {
+        classpath('net.serenity-bdd:serenity-gradle-plugin:1.1.1')     
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'                             
+
+dependencies {
+    testCompile 'net.serenity-bdd:serenity-core:1.1.1'                  
+    testCompile 'net.serenity-bdd:serenity-junit:1.1.1'                
+    testCompile('junit:junit:4.12')
+    testCompile('org.assertj:assertj-core:1.7.0')
+    testCompile('org.slf4j:slf4j-simple:1.7.7')
+    
+    compile 'net.serenity-bdd:serenity-core:1.9.9'
+    compile 'net.serenity-bdd:serenity-junit:1.9.9'
+    compile 'net.serenity-bdd:serenity-cucumber:1.9.5'
+    compile 'net.serenity-bdd:serenity-screenplay:1.9.9'
+    compile 'net.serenity-bdd:serenity-screenplay-webdriver:1.9.9'
+    compile group: 'com.github.noraui', name: 'ojdbc8', version: '12.2.0.1'
+    compile group: 'org.apache.poi', name: 'poi', version: '3.9'
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+compile group: 'com.google.guava', name: 'guava', version: '16.0.1'
+    
+}
+gradle.startParameter.continueOnFailure = true 
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
